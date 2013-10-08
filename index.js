@@ -7,17 +7,28 @@ var classes = require('classes');
 var events = require('events');
 var css = require('css');
 var redraw = require('redraw');
+var is = require('is');
+var afterTransition = require('after-transition');
 
+
+module.exports = function(el, url){
+  if (is.object(el)){
+    var zooms = [];
+    for (var i = 0; i < el.length; i++){
+      zooms.push(new ImageZoom(el[i]));
+    }
+    return zooms;
+  }
+  return new ImageZoom(el, url);
+};
 
 function ImageZoom(el, zoomURL){
-  if (!(this instanceof ImageZoom)) return new ImageZoom(el);
+  classes(el).add('original-image');
   this.thumb = el;
   this.viewport = {};
   this.bind();
   this.backgroundURL = zoomURL;
 }
-
-module.exports = ImageZoom;
 
 ImageZoom.prototype.bind = function(){
   this.events = events(this.thumb, this);
@@ -79,8 +90,6 @@ ImageZoom.prototype.zoomToFull = function(){
     width: '100%',
     height: '100%'
   });
-
-
   return this;
 };
 
@@ -98,8 +107,8 @@ ImageZoom.prototype.hide = function(e){
   this.cloneEvents.unbind();
   this.setOriginalDeminsions();
   var self = this;
-  setTimeout(function(){
+  afterTransition.once(self.clone, function(){
     self.clone.parentNode.removeChild(self.clone);
-  }, 500);
+  });
   return this;
 }

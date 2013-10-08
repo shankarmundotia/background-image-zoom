@@ -9,7 +9,9 @@
     "component/classes": "*",
     "component/events": "*",
     "ianstormtaylor/redraw": "*",
-    "ianstormtaylor/css": "*"
+    "ianstormtaylor/css": "*",
+    "ianstormtaylor/is": "*",
+    "anthonyshort/after-transition": "*"
   },
   "development": {},
   "license": "MIT",

@@ -12,13 +12,15 @@
 ## Example
 
 ```html
-<a href='#' data-zoom-url='inst6.jpg'>
-  <div class='background'></div>
+<a href='#' data-zoom-url='inst6.jpg' style='background-image: url(inst6.jpg); background-size: cover;'>
+</a>
+
+<a href='#' data-zoom-url='inst6.jpg' style='background-image: url(inst6.jpg); background-size: cover;'>
 </a>
 
 <script>
 var zoom = require('background-image-zoom');
-var z = new zoom(document.querySelector('a'));
+var z = new zoom(document.querySelectorAll('a'));
 </script>
 ```
 

@@ -2,6 +2,7 @@
 <head>
   <title></title>
 <script src='build/build.js'></script>
+<link href='build/build.css' rel='stylesheet'>
 
 <style>
 
@@ -31,10 +32,13 @@ a {
 <a href='#' data-zoom-url='inst6.jpg'>
   <div class='background'></div>
 </a>
+<a href='#' data-zoom-url='inst6.jpg'>
+  <div class='background'></div>
+</a>
 
 <script>
 var zoom = require('background-image-zoom');
-var z = new zoom(document.querySelector('a'));
+var z = zoom(document.querySelectorAll('a'));
 
 </script>
 

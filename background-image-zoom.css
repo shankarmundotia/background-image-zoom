@@ -9,4 +9,15 @@
   -webkit-transform: translate3d(0,0,0);
   transform: translate3d(0,0,0);
   position: fixed;
+  cursor: -webkit-zoom-out;
+  cursor: -moz-zoom-out;
+  cursor: -ms-zoom-out;
+  cursor: zoom-out;
+}
+
+.original-image {
+  cursor: -webkit-zoom-in;
+  cursor: -moz-zoom-in;
+  cursor: -ms-zoom-in;
+  cursor: zoom-in;
 }
