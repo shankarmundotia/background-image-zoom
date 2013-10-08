@@ -28,12 +28,35 @@ function ImageZoom(el, zoomURL){
   this.viewport = {};
   this.bind();
   this.backgroundURL = zoomURL;
-}
+};
 
 ImageZoom.prototype.bind = function(){
   this.events = events(this.thumb, this);
   this.events.bind('click', 'show');
-}
+};
+
+ImageZoom.prototype.loadImage = function(fn){
+  if (this.hasLoaded) return fn();
+  var img = new Image();
+  var self = this;
+  setTimeout(function(){
+    if (!self.hasLoaded) self.loading();
+  }, 50);
+  img.onload = function(){
+    self.hasLoaded = true;
+    self.finishLoading();
+    fn();
+  }
+  img.src = this.src;
+};
+
+ImageZoom.prototype.loading = function(){
+  classes(this.thumb).add('loading');
+};
+
+ImageZoom.prototype.finishLoading = function(){
+  classes(this.thumb).remove('loading');
+};
 
 ImageZoom.prototype.getDimensions = function(fn){
   this.originalPosition = offset(this.thumb);
@@ -53,7 +76,7 @@ ImageZoom.prototype.getDimensions = function(fn){
 
   this.src = this.thumb.getAttribute('data-zoom-url') || this.backgroundURL;
   return this;
-}
+};
 
 ImageZoom.prototype.createClone = function(){
   this.clone = document.createElement('div');
@@ -63,7 +86,7 @@ ImageZoom.prototype.createClone = function(){
   this.setOriginalDeminsions();
   document.body.appendChild(this.clone);
   return this;
-}
+};
 
 ImageZoom.prototype.setOriginalDeminsions = function(){
   // Ideally, we would use translate3d to animate the position of the
@@ -80,7 +103,7 @@ ImageZoom.prototype.setOriginalDeminsions = function(){
     'background-image' : 'url('+ this.src +')'
   });
   return this;
-}
+};
 
 ImageZoom.prototype.zoomToFull = function(){
   redraw(this.clone);
@@ -95,12 +118,14 @@ ImageZoom.prototype.zoomToFull = function(){
 
 ImageZoom.prototype.show = function(e){
   if (e) e.preventDefault();
-  this
-    .getDimensions()
-    .createClone()
-    .zoomToFull();
+  this.getDimensions();
+  var self = this;
+  this.loadImage(function(){
+    self.createClone()
+    self.zoomToFull();
+  });
   return this;
-}
+};
 
 ImageZoom.prototype.hide = function(e){
   if (e) e.preventDefault();
@@ -111,4 +136,4 @@ ImageZoom.prototype.hide = function(e){
     self.clone.parentNode.removeChild(self.clone);
   });
   return this;
-}
+};

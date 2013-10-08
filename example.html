@@ -8,6 +8,7 @@
 
 a {
   display: inline-block;
+  position: relative;
 }
 
 .background {
@@ -24,15 +25,37 @@ a {
   position: fixed;
 }
 
+.loading-text {
+  display: none;
+  position: absolute;
+}
+
+a.loading .loading-text {
+  display: block;
+}
+
+.interactive {
+  position: absolute;
+}
+
 </style>
 </head>
 <body>
 
 <br><br><br>
 <a href='#' data-zoom-url='inst6.jpg'>
+  <img class='interactive' src='interactive.svg'>
+  <div class='loading-text'>Loading...</div>
   <div class='background'></div>
 </a>
 <a href='#' data-zoom-url='inst6.jpg'>
+  <img class='interactive' src='interactive.svg'>
+  <div class='loading-text'>Loading...</div>
+  <div class='background'></div>
+</a>
+<a href='#' data-zoom-url='inst6.jpg'>
+  <img class='interactive' src='interactive.svg'>
+  <div class='loading-text'>Loading...</div>
   <div class='background'></div>
 </a>
 
