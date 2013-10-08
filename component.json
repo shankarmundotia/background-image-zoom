@@ -1,0 +1,24 @@
+{
+  "name": "background-image-zoom",
+  "repo": "eugenicsarchivesca/background-image-zoom",
+  "description": "zoom a background image to full screen",
+  "version": "0.0.1",
+  "keywords": [],
+  "dependencies": {
+    "timoxley/offset": "*",
+    "component/classes": "*",
+    "component/events": "*",
+    "ianstormtaylor/redraw": "*",
+    "ianstormtaylor/css": "*"
+  },
+  "development": {},
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": [
+    "index.js"
+  ],
+  "styles": [
+    "background-image-zoom.css"
+  ],
+  "remotes": []
+}

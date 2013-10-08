@@ -1,0 +1,42 @@
+<html>
+<head>
+  <title></title>
+<script src='build/build.js'></script>
+
+<style>
+
+a {
+  display: inline-block;
+}
+
+.background {
+  background-image: url('inst6.jpg');
+  background-size: cover;
+  width: 300px;
+  height: 200px;
+}
+
+.image-clone {
+  transition: all 0.3s linear;
+  background-size: cover;
+  -webkit-transform: translate3d(0,0,0);
+  position: fixed;
+}
+
+</style>
+</head>
+<body>
+
+<br><br><br>
+<a href='#' data-zoom-url='inst6.jpg'>
+  <div class='background'></div>
+</a>
+
+<script>
+var zoom = require('background-image-zoom');
+var z = new zoom(document.querySelector('a'));
+
+</script>
+
+</body>
+</html>
