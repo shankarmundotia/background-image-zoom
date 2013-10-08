@@ -5,13 +5,13 @@
   "version": "0.0.1",
   "keywords": [],
   "dependencies": {
-    "timoxley/offset": "*",
     "component/classes": "*",
     "component/events": "*",
     "ianstormtaylor/redraw": "*",
     "ianstormtaylor/css": "*",
     "ianstormtaylor/is": "*",
-    "anthonyshort/after-transition": "*"
+    "anthonyshort/after-transition": "*",
+    "component/emitter": "*"
   },
   "development": {},
   "license": "MIT",

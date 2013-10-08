@@ -24,6 +24,24 @@ var z = new zoom(document.querySelectorAll('a'));
 </script>
 ```
 
+## API
+
+### zoom(el, url)
+
+Make an element zoomable. The element must either have a `data-zoom-url` attribute, pointing to the full-sized image, or you need to supply it in the constructor.
+
+### zoom.show()
+
+Zoom the thumbnail to fullscreen.
+
+### zoom.hide()
+
+Zoom back to the thumbnail.
+
+## Events
+
+### zoom.on('zoomed-out');
+### zoom.on('zoom');
 
 
 ## License

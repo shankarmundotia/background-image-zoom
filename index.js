@@ -2,14 +2,13 @@
 // statically over-top the current element, and then we
 // programatically zoom it to the maximum dimensions allowed.
 
-var offset = require('offset');
 var classes = require('classes');
 var events = require('events');
 var css = require('css');
 var redraw = require('redraw');
 var is = require('is');
 var afterTransition = require('after-transition');
-
+var Emitter = require('emitter');
 
 module.exports = function(el, url){
   if (is.object(el)){
@@ -29,6 +28,8 @@ function ImageZoom(el, zoomURL){
   this.bind();
   this.backgroundURL = zoomURL;
 };
+
+Emitter(ImageZoom.prototype);
 
 ImageZoom.prototype.bind = function(){
   this.events = events(this.thumb, this);
@@ -59,21 +60,11 @@ ImageZoom.prototype.finishLoading = function(){
 };
 
 ImageZoom.prototype.getDimensions = function(fn){
-  this.originalPosition = offset(this.thumb);
-  // IE doesnt have window.innerHeight.
-  // this.viewport.height = "innerHeight" in window
-  //   ? window.innerHeight
-  //   : document.documentElement.offsetHeight;
-
-  // this.viewport.width = "innerWidth" in window
-  //   ? window.innerWidth
-  //   : document.documentElement.offsetWidth;
-
+  this.originalPosition = this.thumb.getBoundingClientRect();
   this.originalDimensions = {
     width: this.thumb.clientWidth,
     height: this.thumb.clientHeight
   };
-
   this.src = this.thumb.getAttribute('data-zoom-url') || this.backgroundURL;
   return this;
 };
@@ -92,9 +83,6 @@ ImageZoom.prototype.setOriginalDeminsions = function(){
   // Ideally, we would use translate3d to animate the position of the
   // element, instead of left + top. Consider using the below
   // code in the future...
-  // var translateX = (o.x + (o.w / 2)) - (t.x + (t.w / 2));
-  // var translateY = (o.y + (o.h / 2)) - (t.y + (t.h / 2));
-  // var translate3d = 'translate3d('+ translateX +'px, '+ translateY +'px, 0)';
   css(this.clone, {
     top: this.originalPosition.top,
     left: this.originalPosition.left,
@@ -113,6 +101,7 @@ ImageZoom.prototype.zoomToFull = function(){
     width: '100%',
     height: '100%'
   });
+  this.emit('zoom', this);
   return this;
 };
 
@@ -134,6 +123,7 @@ ImageZoom.prototype.hide = function(e){
   var self = this;
   afterTransition.once(self.clone, function(){
     self.clone.parentNode.removeChild(self.clone);
+    self.emit('zoomed-out', self);
   });
   return this;
 };
