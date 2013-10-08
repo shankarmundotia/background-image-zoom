@@ -20,7 +20,7 @@
 var zoom = require('background-image-zoom');
 var z = new zoom(document.querySelector('a'));
 </script>
-```html
+```
 
 
 
