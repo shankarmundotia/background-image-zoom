@@ -9,7 +9,18 @@
 
     $ component install eugenicsarchivesca/background-image-zoom
 
-## API
+## Example
+
+```html
+<a href='#' data-zoom-url='inst6.jpg'>
+  <div class='background'></div>
+</a>
+
+<script>
+var zoom = require('background-image-zoom');
+var z = new zoom(document.querySelector('a'));
+</script>
+```html
 
 
 
